@@ -10,6 +10,7 @@ internal static class ContentTypes
 		  <Default Extension="psmdcp" ContentType="application/vnd.openxmlformats-package.core-properties+xml" />
 		  <Default Extension="dll" ContentType="application/octet" />
 		  <Default Extension="xml" ContentType="application/octet" />
+		  <Default Extension="md" ContentType="application/octet" />
 		  <Default Extension="nuspec" ContentType="application/octet" />
 		</Types>
 		""";

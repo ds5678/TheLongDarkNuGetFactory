@@ -25,6 +25,8 @@ internal class Program
 		yield return GetEntryData(NuSpec.Path, NuSpec.Content);
 		yield return GetEntryData(ContentTypes.Path, ContentTypes.Content);
 		yield return GetEntryData(Psmdcp.Path, Psmdcp.Content);
+		yield return GetEntryData(License.Path, License.Content);
+		yield return GetEntryData(ReadMe.Path, ReadMe.Content);
 		foreach (string assemblyPath in Directory.EnumerateFiles(il2cppAssembliesDirectory, "*.dll"))
 		{
 			string fileName = Path.GetFileName(assemblyPath);

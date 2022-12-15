@@ -11,6 +11,9 @@ internal static class NuSpec
 		    <version>{PackageInformation.Version}</version>
 		    <title>{PackageInformation.Name}</title>
 		    <authors>{PackageInformation.Authors}</authors>
+		    <license type="expression">{License.Type}</license>
+		    <licenseUrl>{License.Url}</licenseUrl>
+		    <readme>{ReadMe.Path}</readme>
 		    <projectUrl>{PackageInformation.RepositoryLink}</projectUrl>
 		    <description>{PackageInformation.Description}</description>
 		    <copyright>Copyright © Hinterland Games</copyright>

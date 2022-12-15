@@ -3,7 +3,7 @@
 internal static class PackageInformation
 {
 	public const string Authors = "ds5678";
-	public const string Name = "ds5678.TLD.Il2CppAssemblies";
+	public const string Name = "ds5678.Modding.TLD.Il2CppAssemblies.Windows";
 	/// <summary>
 	/// 2.04, nuget release 0
 	/// </summary>
