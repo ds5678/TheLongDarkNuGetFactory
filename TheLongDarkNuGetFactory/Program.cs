@@ -40,6 +40,7 @@ internal class Program
 		return (path, Encoding.UTF8.GetBytes(content));
 	}
 
+	// This fixes an issue where the NullableAttribute defined in the assembly confuses the compiler.
 	private static byte[] RemoveNullableAttribute(byte[] data)
 	{
 		ModuleDefinition module = ModuleDefinition.FromBytes(data);
