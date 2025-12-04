@@ -1,4 +1,5 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using AsmResolver.DotNet;
+using ICSharpCode.SharpZipLib.Zip;
 using System.Text;
 
 namespace TheLongDarkNuGetFactory;
@@ -30,12 +31,33 @@ internal class Program
 		foreach (string assemblyPath in Directory.EnumerateFiles(il2cppAssembliesDirectory, "*.dll"))
 		{
 			string fileName = Path.GetFileName(assemblyPath);
-			yield return ($"lib/net6.0/{fileName}", File.ReadAllBytes(assemblyPath));
+			yield return ($"lib/net6.0/{fileName}", RemoveNullableAttribute(File.ReadAllBytes(assemblyPath)));
 		}
 	}
 
 	private static (string, byte[]) GetEntryData(string path, string content)
 	{
 		return (path, Encoding.UTF8.GetBytes(content));
+	}
+
+	private static byte[] RemoveNullableAttribute(byte[] data)
+	{
+		ModuleDefinition module = ModuleDefinition.FromBytes(data);
+		bool modified = false;
+		for (int i = module.TopLevelTypes.Count - 1; i >= 0; i--)
+		{
+			if (module.TopLevelTypes[i] is { Namespace.Value: "System.Runtime.CompilerServices", Name.Value: "NullableAttribute" })
+			{
+				module.TopLevelTypes.RemoveAt(i);
+				modified = true;
+			}
+		}
+		if (modified)
+		{
+			using MemoryStream stream = new();
+			module.Write(stream);
+			data = stream.ToArray();
+		}
+		return data;
 	}
 }
